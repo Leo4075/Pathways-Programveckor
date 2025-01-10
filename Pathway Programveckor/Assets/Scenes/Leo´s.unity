@@ -898,8 +898,8 @@ MonoBehaviour:
   gunTransform: {fileID: 665659006}
   bulletPrefab: {fileID: 4704279795201698066, guid: fe925560e8c13ff4e8ee8130b4c28034, type: 3}
   bulletSpawnPoint: {fileID: 677463815}
-  bulletSpeed: 30
-  shootingCooldown: 0.05
+  bulletSpeed: 20
+  shootingCooldown: 0.3
 --- !u!212 &665659008
 SpriteRenderer:
   m_ObjectHideFlags: 0
