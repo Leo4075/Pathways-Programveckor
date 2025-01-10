@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3976043a32bcb54cb5c87d8c49c1950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Valscen 1
+  sceneToLoad: "V\xE4gval A1"
 --- !u!212 &1365448020
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3976043a32bcb54cb5c87d8c49c1950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Valscen 2
+  sceneToLoad: "V\xE4gval A2"
 --- !u!212 &1933569009
 SpriteRenderer:
   m_ObjectHideFlags: 0
