@@ -4,30 +4,23 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public float Xvelocity = 3f;
-    public float Yvelocity = 5f;
+    private float horizontal;
+    private float speed = 8f;
+    private float jumpingPower = 16f;
+    private bool isFacingRight = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundlayer;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            rb.velocity = new Vector2(Xvelocity, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            rb.velocity = new Vector2(-Xvelocity, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            rb.velocity = new Vector2(0, Yvelocity);
-        }
+        horizontal = Input.GetAxisRaw("Horizontal");
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 }
