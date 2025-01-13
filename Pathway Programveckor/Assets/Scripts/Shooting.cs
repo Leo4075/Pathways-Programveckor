@@ -10,15 +10,8 @@ public class GunController : MonoBehaviour
     private float cooldown;
     private bool isCooldownOn = false;
 
-    private void Start()
-    {
-        
-    }
-
     void Update()
     {
-        Debug.Log(cooldown);
-
         if (Input.GetKey(KeyCode.Mouse0))
         {
             if(isCooldownOn == false)
