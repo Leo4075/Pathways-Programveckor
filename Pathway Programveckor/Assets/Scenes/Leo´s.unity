@@ -828,7 +828,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2071205949}
-  - {fileID: 1677212911}
   - {fileID: 665659006}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -844,12 +843,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a33ce94ecda984ba2a2d26d28a5431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 641995665}
+  moveSpeed: 10
+  jumpForce: 15
   groundCheck: {fileID: 2071205949}
-  groundlayer:
+  groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  gunTransform: {fileID: 665659006}
 --- !u!1 &665659005
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,11 +895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09988aed0114108468a16ac23fdb448e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunTransform: {fileID: 665659006}
-  bulletPrefab: {fileID: 4704279795201698066, guid: fe925560e8c13ff4e8ee8130b4c28034, type: 3}
-  bulletSpawnPoint: {fileID: 677463815}
-  bulletSpeed: 20
-  shootingCooldown: 0.3
 --- !u!212 &665659008
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1883,38 +1877,26 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -11.95}
-  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 641995668}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1677212912
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &1677212912
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677212908}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a667cc7ba55e82a45a7203ea68d9bcc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: -10}
+  smoothTime: 0.2
+  target: {fileID: 641995668}
 --- !u!1 &1697264360
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,3 +2409,4 @@ SceneRoots:
   - {fileID: 641995668}
   - {fileID: 744416500}
   - {fileID: 1098826419}
+  - {fileID: 1677212911}

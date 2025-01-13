@@ -1,69 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class SimplePlayerMovement : MonoBehaviour
 {
-    private float horizontal;
-    private float speed = 8f;
-    private float jumpingPower = 16f;
+    public float moveSpeed = 5f;   // Speed at which the player moves horizontally
+    public float jumpForce = 10f;  // Force applied when the player jumps
+    public Transform groundCheck;  // Transform used to check if the player is grounded
+    public LayerMask groundLayer;  // Layer to detect if the player is on the ground
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundlayer;
+    private Rigidbody2D rb;
+    private bool isGrounded;
 
-    [SerializeField] private Transform gunTransform;  // Reference to the gun's transform
-    private bool isFacingRight = true;
+    void Start()
+    {
+        // Get the Rigidbody2D component
+        rb = GetComponent<Rigidbody2D>();
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        // Check if the player is on the ground
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        // Jump if the player presses the space key and is grounded
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        }
-
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
-        }
-
-        // Update character's facing direction based on the gun's position
-        UpdateFacingDirection();
-    }
-
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundlayer);
-    }
-
-    // Method to update character's facing direction based on the gun's position relative to the player
-    private void UpdateFacingDirection()
-    {
-        // Check if the gun is to the left or right of the player
-        if (gunTransform.position.x < transform.position.x && isFacingRight)
-        {
-            Flip();
-        }
-        else if (gunTransform.position.x > transform.position.x && !isFacingRight)
-        {
-            Flip();
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);  // Apply jump force
         }
     }
 
-    // Flip the character's direction
-    private void Flip()
+    void FixedUpdate()
     {
-        isFacingRight = !isFacingRight;
-        Vector3 localscale = transform.localScale;
-        localscale.x *= -1f; // Flip the local scale
-        transform.localScale = localscale;
+        // Get movement input (A for left, D for right)
+        float horizontal = 0f;
+
+        if (Input.GetKey(KeyCode.A))  // Move left when A is pressed
+        {
+            horizontal = -1f;
+        }
+        else if (Input.GetKey(KeyCode.D))  // Move right when D is pressed
+        {
+            horizontal = 1f;
+        }
+
+        // Apply horizontal movement (no need for smoothing)
+        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
     }
 }
+    
