@@ -163,3 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: -4918064592279586620}
   bulletSpeed: 10
+  mainCamera: {fileID: 5387041862183124745, guid: 0ea5911d59a9486479ba24aa176a7ae2, type: 3}
