@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class GunDirection : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector2 Pointerposition { get; set; }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        transform.right = (Pointerposition - (Vector2)transform.position).normalized;
     }
 }

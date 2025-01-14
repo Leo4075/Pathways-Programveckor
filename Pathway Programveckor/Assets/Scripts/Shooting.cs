@@ -35,4 +35,6 @@ public class GunController : MonoBehaviour
         isCooldownOn = true;
         Instantiate(bulletPrefab, bulletSpawnPos);
     }
+
+
 }
