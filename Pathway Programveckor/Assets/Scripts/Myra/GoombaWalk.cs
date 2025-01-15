@@ -11,6 +11,7 @@ public class GoombaWalk : MonoBehaviour
     public LayerMask groundLayer;
     public Transform checkRight;
     public Transform checkLeft;
+    private bool isGrounded;
     
     private bool movingRight = true;
 
@@ -41,11 +42,26 @@ public class GoombaWalk : MonoBehaviour
             movingRight = true;
         }
 
-        int direction = movingRight ? 1 : -1;
-        rb.velocity = new Vector2(speed * direction, rb.velocity.y);
+        if(!IsGroundAtPoint(checkLeft)&& !IsGroundAtPoint(checkLeft))
+        {
+            isGrounded = false;
+        }
+        else { isGrounded = true; }
+
+        if (isGrounded)
+        {
+            int direction = movingRight ? 1 : -1;
+            rb.velocity = new Vector2(speed * direction, rb.velocity.y);
+        }
+        
     }
     bool IsGroundAtPoint(Transform checkPoint)
     {
         return Physics2D.OverlapCircle(checkPoint.position, checkRadius, groundLayer);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        movingRight = !movingRight;
     }
 }
