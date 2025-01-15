@@ -449,9 +449,9 @@ GameObject:
   m_Component:
   - component: {fileID: 462619326}
   - component: {fileID: 462619325}
-  - component: {fileID: 462619327}
   - component: {fileID: 462619329}
   - component: {fileID: 462619328}
+  - component: {fileID: 462619330}
   m_Layer: 0
   m_Name: Myra
   m_TagString: Untagged
@@ -528,25 +528,6 @@ Transform:
   - {fileID: 117083360}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &462619327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462619324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcee4c451e1d5ce48833d6beb06f7b96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  checkRadius: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  checkRight: {fileID: 1167669129}
-  checkLeft: {fileID: 117083360}
 --- !u!61 &462619328
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -619,6 +600,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &462619330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462619324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcee4c451e1d5ce48833d6beb06f7b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  checkRadius: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  checkRight: {fileID: 1167669129}
+  checkLeft: {fileID: 117083360}
 --- !u!1 &713789046
 GameObject:
   m_ObjectHideFlags: 0
@@ -9570,27 +9570,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1733990485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2904103c18adb448298de08782f4db, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ec08709f37e6094ba5e14b5094a633e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolSpeed: 3
-  borderCheckRadius: 1
+  patrolSpeed: 2
+  borderCheckRadius: 0.1
   antiborderLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   borderCheckRight: {fileID: 783311729}
   borderCheckLeft: {fileID: 1861645992}
   startPos: {fileID: 840166398}
   player: {fileID: 1965038423}
-  detectionRange: 9
+  detectionRange: 5
   playerLayer:
     serializedVersion: 2
-    m_Bits: 1024
-  followSpeed: 5
+    m_Bits: 0
+  followSpeed: 3
   stopDistance: 2
-  posTolerance: 0.1
-  dashCooldown: 5
-  dashDuration: 1
+  posTolerance: 1
+  dashCooldown: 3
+  dashDuration: 2
   dashSpeed: 10
 --- !u!50 &1733990488
 Rigidbody2D:
