@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SideFlight : MonoBehaviour
+public class Mygga : MonoBehaviour
 {
     //Rörelserelaterade variabler
     //Antiborder: Ett empty-gameObject med en box collider som fienden patrullerar inom
