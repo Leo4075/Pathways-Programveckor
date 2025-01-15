@@ -85,13 +85,13 @@ public class SideFlight : MonoBehaviour
     {
         if (!Scan(borderCheckRight,borderCheckRadius,antiborderLayer))
         {
-            Debug.Log("Det finns ingen antiborder till höger");
+            //Debug.Log("Det finns ingen antiborder till höger");
             movingRight = false;
         }
 
         if (!Scan(borderCheckLeft,borderCheckRadius,antiborderLayer))
         {
-            Debug.Log("Det finns ingen antiborder till vänster");
+            //Debug.Log("Det finns ingen antiborder till vänster");
             movingRight = true;
         }
 
@@ -124,7 +124,7 @@ public class SideFlight : MonoBehaviour
 
         if (dashCooldownTimer <= 0)
         {
-            Debug.Log("<color=red>Dash Activated</color>");
+            //Debug.Log("<color=red>Dash Activated</color>");
             dashActivated = true;
             dashStart = true;
             dashCooldownTimer = dashCooldown;
@@ -137,7 +137,7 @@ public class SideFlight : MonoBehaviour
     {
         if (dashStart)
         {
-            Debug.Log("<color=yellow>Dash Start</color>");
+            //Debug.Log("<color=yellow>Dash Start</color>");
             dashStart = false;
             dashDurationTimer = dashDuration;
             //Beräkna riktningen innan attacken
@@ -148,9 +148,26 @@ public class SideFlight : MonoBehaviour
         rb.velocity = dashDirection * dashSpeed;
         if (dashDurationTimer <= 0)
         {
-            dashActivated = false;
-            dashStart = false;
+            DashEnd();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log("Collision, dashActivaded="+dashActivated);
+        if (dashActivated)
+        {
+            //Debug.Log("Dashed into object");
+            DashEnd();
+        }
+    }
+
+    void DashEnd()
+    {
+        Debug.Log("Dash end = true");
+        dashActivated = false;
+        dashStart = true;
+        rb.velocity = Vector2.zero; // Stoppa rörelsen
     }
 
     void ReturnToStart()   //Fienden återvänder till startpunkten
