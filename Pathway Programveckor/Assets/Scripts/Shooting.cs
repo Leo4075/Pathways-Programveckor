@@ -33,8 +33,6 @@ public class GunController : MonoBehaviour
     void shoot()
     {
         isCooldownOn = true;
-        Instantiate(bulletPrefab, bulletSpawnPos);
+        Instantiate(bulletPrefab, bulletSpawnPos.position, bulletSpawnPos.rotation);
     }
-
-
 }

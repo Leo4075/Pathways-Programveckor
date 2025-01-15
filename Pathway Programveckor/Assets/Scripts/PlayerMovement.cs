@@ -1,4 +1,6 @@
+using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SimplePlayerMovement : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class SimplePlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded;
+    private bool isFacingRight = true;
 
     void Start()
     {
@@ -36,14 +39,34 @@ public class SimplePlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))  // Move left when A is pressed
         {
             horizontal = -1f;
+            if (isFacingRight)
+            {
+                Flip();  // Flip the character to face left
+            }
         }
         else if (Input.GetKey(KeyCode.D))  // Move right when D is pressed
         {
             horizontal = 1f;
+            if (!isFacingRight)
+            {
+                Flip();  // Flip the character to face right
+            }
         }
 
         // Apply horizontal movement (no need for smoothing)
         rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+    }
+
+    // Method to flip the player character
+    void Flip()
+    {
+        // Flip the object's scale on the X-axis to reverse its direction
+        Vector3 scale = transform.localScale;
+        scale.x = -scale.x;  // Negate the x scale to flip
+        transform.localScale = scale;
+
+        // Toggle the facing direction
+        isFacingRight = !isFacingRight;
     }
 }
     

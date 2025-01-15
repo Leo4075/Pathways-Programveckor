@@ -9,6 +9,8 @@ public class BulletBehaviour : MonoBehaviour
 
     public Camera mainCamera;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +26,9 @@ public class BulletBehaviour : MonoBehaviour
 
         Vector3 viewportPos = mainCamera.WorldToViewportPoint(transform.position);
 
-        // Check if the object is outside the screen
         if (viewportPos.x < 0f || viewportPos.x > 1f || viewportPos.y < 0f || viewportPos.y > 1f)
         {
             Destroy(gameObject);
-            // You can perform actions when the object is off-screen, like disabling it or triggering an event
         }
     }
 }
