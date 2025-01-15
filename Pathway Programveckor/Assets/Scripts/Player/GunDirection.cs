@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GunDirection : MonoBehaviour
 {
+    public Rigidbody2D rb;
+    public float recoilForce = 25f; // The amount of recoil force
+
     public Transform gunTransform; // The gun's transform that needs to rotate
     public GameObject bulletPrefab; // Bullet prefab to be instantiated
     public Transform bulletSpawnPoint; // Where the bullet spawns from
@@ -12,6 +16,11 @@ public class GunDirection : MonoBehaviour
 
     // Add this to track if the player is facing right
     private bool isFacingRight = true;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
@@ -30,6 +39,11 @@ public class GunDirection : MonoBehaviour
 
         // Calculate the direction from the gun to the cursor
         Vector2 direction = cursorPos - (Vector2)gunTransform.position;
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            rb.AddForce(-direction * recoilForce, ForceMode2D.Impulse);
+        }
 
         // Calculate the angle the gun needs to rotate to
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
