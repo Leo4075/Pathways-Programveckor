@@ -6,8 +6,8 @@ public class TestMovement : MonoBehaviour
 {
     [SerializeField]
 
-    public float moveSpeed = 5f;   // Speed at which the player moves horizontally
-    public float jumpForce = 10f;  // Force applied when the player jumps
+    public float moveSpeed = 10f;   // Speed at which the player moves horizontally
+    public float jumpForce = 15f;  // Force applied when the player jumps
     public Transform groundCheck;  // Transform used to check if the player is grounded
     public LayerMask groundLayer;  // Layer to detect if the player is on the ground
 
