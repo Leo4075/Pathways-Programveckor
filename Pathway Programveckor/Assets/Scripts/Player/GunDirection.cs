@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GunDirection : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float recoilForce = 25f; // The amount of recoil force
+    public float recoilCooldown = 0.5f; // Cooldown time between recoils (in seconds)
 
     public Transform gunTransform; // The gun's transform that needs to rotate
     public GameObject bulletPrefab; // Bullet prefab to be instantiated
@@ -13,8 +13,8 @@ public class GunDirection : MonoBehaviour
     public float shootingCooldown = 0.5f; // Time between shots
 
     private float lastShotTime = 0f;
+    private float lastRecoilTime = 0f; // Timer to track the last recoil time
 
-    // Add this to track if the player is facing right
     private bool isFacingRight = true;
 
     private void Start()
@@ -40,9 +40,12 @@ public class GunDirection : MonoBehaviour
         // Calculate the direction from the gun to the cursor
         Vector2 direction = cursorPos - (Vector2)gunTransform.position;
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        // Check if enough time has passed since the last recoil
+        if (Input.GetKey(KeyCode.Mouse0) && Time.time - lastRecoilTime >= recoilCooldown)
         {
+            // Trigger recoil
             rb.AddForce(-direction * recoilForce, ForceMode2D.Impulse);
+            lastRecoilTime = Time.time; // Reset recoil cooldown timer
         }
 
         // Calculate the angle the gun needs to rotate to
@@ -65,22 +68,20 @@ public class GunDirection : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
 
         // Set the bullet's velocity in the direction of the cursor
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        if (bulletRb != null)
         {
-            rb.velocity = direction.normalized * bulletSpeed;
+            bulletRb.velocity = direction.normalized * bulletSpeed;
         }
     }
 
     // The Flip method that changes the direction the player is facing
     void Flip()
     {
-        // Flip the object's scale on the X-axis to reverse its direction
         Vector3 scale = transform.localScale;
         scale.x = -scale.x;  // Negate the x scale to flip
         transform.localScale = scale;
 
-        // Toggle the facing direction
         isFacingRight = !isFacingRight;
     }
 }
