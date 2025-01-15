@@ -13,7 +13,7 @@ public class SimplePlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded;
-    [SerializeField] private bool isFacingRight = true;
+    public bool isFacingRight = true;
 
     void Start()
     {
