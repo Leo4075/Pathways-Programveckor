@@ -8929,6 +8929,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  isFacingRight: 1
 --- !u!50 &1965038420
 Rigidbody2D:
   serializedVersion: 4

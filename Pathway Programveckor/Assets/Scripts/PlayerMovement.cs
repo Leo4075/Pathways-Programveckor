@@ -4,6 +4,8 @@ using UnityEngine.UIElements;
 
 public class SimplePlayerMovement : MonoBehaviour
 {
+    [SerializeField]
+
     public float moveSpeed = 5f;   // Speed at which the player moves horizontally
     public float jumpForce = 10f;  // Force applied when the player jumps
     public Transform groundCheck;  // Transform used to check if the player is grounded
@@ -11,7 +13,7 @@ public class SimplePlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded;
-    private bool isFacingRight = true;
+    [SerializeField] private bool isFacingRight = true;
 
     void Start()
     {
