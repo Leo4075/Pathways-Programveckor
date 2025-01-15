@@ -250,18 +250,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd2904103c18adb448298de08782f4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  patrolSpeed: 3
   borderCheckRadius: 1
   antiborderLayer:
     serializedVersion: 2
     m_Bits: 256
   borderCheckRight: {fileID: 1321493430}
   borderCheckLeft: {fileID: 1520152610}
-  detectionZoneCenter: {fileID: 1435184574}
-  detectionZoneRadius: 5
+  startPos: {fileID: 1454855340}
+  player: {fileID: 1983486008}
+  detectionRange: 9
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
+  followSpeed: 5
+  stopDistance: 2
+  posTolerance: 0.1
+  dashCooldown: 5
+  dashDuration: 1
+  dashSpeed: 10
 --- !u!1 &864702849
 GameObject:
   m_ObjectHideFlags: 0
