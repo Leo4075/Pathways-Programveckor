@@ -4,7 +4,6 @@ public class GunDirection : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float recoilForce = 25f; // The amount of recoil force
-    public float recoilCooldown = 0.5f; // Cooldown time between recoils (in seconds)
 
     public Transform gunTransform; // The gun's transform that needs to rotate
     public GameObject bulletPrefab; // Bullet prefab to be instantiated
@@ -40,14 +39,6 @@ public class GunDirection : MonoBehaviour
         // Calculate the direction from the gun to the cursor
         Vector2 direction = cursorPos - (Vector2)gunTransform.position;
 
-        // Check if enough time has passed since the last recoil
-        if (Input.GetKey(KeyCode.Mouse0) && Time.time - lastRecoilTime >= recoilCooldown)
-        {
-            // Trigger recoil
-            rb.AddForce(-direction * recoilForce, ForceMode2D.Impulse);
-            lastRecoilTime = Time.time; // Reset recoil cooldown timer
-        }
-
         // Calculate the angle the gun needs to rotate to
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -55,10 +46,12 @@ public class GunDirection : MonoBehaviour
         gunTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         // Check if the player clicks the mouse and enough time has passed since the last shot
-        if (Input.GetButton("Fire1") && Time.time - lastShotTime > shootingCooldown)
+        if (Input.GetKey(KeyCode.Mouse0) && Time.time - lastShotTime > shootingCooldown)
         {
             ShootBullet(direction);
             lastShotTime = Time.time; // Update the last shot time
+            rb.AddForce(-direction * recoilForce, ForceMode2D.Impulse);
+            lastRecoilTime = Time.time; // Reset recoil cooldown timer
         }
     }
 

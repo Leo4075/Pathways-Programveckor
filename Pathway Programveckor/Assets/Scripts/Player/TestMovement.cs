@@ -31,10 +31,7 @@ public class TestMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);  // Apply jump force
         }
-    }
 
-    void FixedUpdate()
-    {
         // Get movement input (A for left, D for right)
         float horizontal = 0f;
 
@@ -49,6 +46,11 @@ public class TestMovement : MonoBehaviour
 
         // Apply horizontal movement (no need for smoothing)
         rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+    }
+
+    void FixedUpdate()
+    {
+      
     }
 
     // Method to flip the player character
