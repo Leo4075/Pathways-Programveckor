@@ -10,9 +10,9 @@ public class GunDirection : MonoBehaviour
     public Transform bulletSpawnPoint; // Where the bullet spawns from
     public float bulletSpeed = 10f; // Speed of the bullet
     public float shootingCooldown = 0.5f; // Time between shots
+    public Vector2 direction;
 
     private float lastShotTime = 0f;
-    private float lastRecoilTime = 0f; // Timer to track the last recoil time
 
     private bool isFacingRight = true;
 
@@ -37,7 +37,7 @@ public class GunDirection : MonoBehaviour
         }
 
         // Calculate the direction from the gun to the cursor
-        Vector2 direction = cursorPos - (Vector2)gunTransform.position;
+        direction = cursorPos - (Vector2)gunTransform.position.normalized;
 
         // Calculate the angle the gun needs to rotate to
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -50,8 +50,7 @@ public class GunDirection : MonoBehaviour
         {
             ShootBullet(direction);
             lastShotTime = Time.time; // Update the last shot time
-            rb.AddForce(-direction * recoilForce, ForceMode2D.Impulse);
-            lastRecoilTime = Time.time; // Reset recoil cooldown timer
+            rb.AddForce(-direction.normalized * recoilForce, ForceMode2D.Impulse);
         }
     }
 

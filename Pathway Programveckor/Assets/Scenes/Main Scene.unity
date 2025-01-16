@@ -458,7 +458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &462619325
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9537,7 +9537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1733990486
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9903,6 +9903,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 306621506}
   bulletSpeed: 20
   shootingCooldown: 0.5
+  direction: {x: 0, y: 0}
 --- !u!114 &1965038426
 MonoBehaviour:
   m_ObjectHideFlags: 0
