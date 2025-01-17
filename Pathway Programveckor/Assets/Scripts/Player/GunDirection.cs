@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GunDirection : MonoBehaviour
 {
@@ -12,9 +11,19 @@ public class GunDirection : MonoBehaviour
     public float bulletSpeed = 10f; // Speed of the bullet
     public float shootingCooldown = 0.5f; // Time between shots
 
-    private float lastShotTime = 0f;
+    public float retardationSpeed = 0.98f;   // Förändringsfaktor som saktar ner spelaren varje FixedUpdate
+    public float jumpForce = 10f;
 
-    // Add this to track if the player is facing right
+    public float walkSpeed = 10f;
+
+    private float scanRadius = 0.1f;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+
+    private int walkDirection;
+
+    private Vector2 direction;
+    private float lastShotTime = 0f;
     private bool isFacingRight = true;
 
     private void Start()
@@ -24,63 +33,113 @@ public class GunDirection : MonoBehaviour
 
     void Update()
     {
-        // Get the position of the cursor
-        Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        lastShotTime += 1 * Time.deltaTime;
 
-        // Check if the cursor is on the left or right side of the screen
-        if (cursorPos.x < transform.position.x && isFacingRight)
+        AimToCursor();
+        if (ShotAllowed() && Input.GetMouseButton(0))
         {
-            Flip();  // Flip when cursor is on the left
-        }
-        else if (cursorPos.x > transform.position.x && !isFacingRight)
-        {
-            Flip();  // Flip when cursor is on the right
+            Shoot();
         }
 
-        // Calculate the direction from the gun to the cursor
-        Vector2 direction = cursorPos - (Vector2)gunTransform.position;
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
-            rb.AddForce(-direction * recoilForce, ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
 
-        // Calculate the angle the gun needs to rotate to
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Rotate the gun to face the cursor
-        gunTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-        // Check if the player clicks the mouse and enough time has passed since the last shot
-        if (Input.GetButton("Fire1") && Time.time - lastShotTime > shootingCooldown)
+        if (Input.GetKey(KeyCode.D) && IsGrounded())
         {
-            ShootBullet(direction);
-            lastShotTime = Time.time; // Update the last shot time
+            walkDirection = 1;
         }
+        else if (Input.GetKey(KeyCode.A) && IsGrounded())
+        {
+            walkDirection = -1;
+        }
+        else { walkDirection = 0; }
     }
 
-    void ShootBullet(Vector2 direction)
+    private void FixedUpdate()
     {
-        // Instantiate the bullet at the bullet spawn point
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        rb.velocity = new Vector2(rb.velocity.x * retardationSpeed, rb.velocity.y);
 
-        // Set the bullet's velocity in the direction of the cursor
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.velocity = direction.normalized * bulletSpeed;
-        }
+        float walkVelocity = walkSpeed * walkDirection;
+
+        rb.AddForce(new Vector2(walkVelocity, 0));
+
+        Debug.Log("WalkSpeed=" + walkSpeed);
+        Debug.Log("WalkDirection=" + walkDirection);
+        Debug.Log(walkVelocity);
     }
 
-    // The Flip method that changes the direction the player is facing
-    void Flip()
+    void AimToCursor()
     {
-        // Flip the object's scale on the X-axis to reverse its direction
+        Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);        //Hitta musposition och konvertera till världskoordinater
+
+        if (cursorPos.x < transform.position.x && isFacingRight)                        //Om muspekaren är till vänster om spelaren och vänd mot höger
+        {
+            Flip();
+        }
+        else if (cursorPos.x > transform.position.x && !isFacingRight)                  //Om muspekaren är till höger om spelaren och vänd mot vänster
+        {
+            Flip();
+        }
+
+        direction = cursorPos - (Vector2)gunTransform.position;                         //Beräkna vektorn mellan muspekaren och pistolen
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;            //Konvertera direction till radianer och sedan grader
+
+        gunTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));             //Konverterar angle till Quaternion som sedan bestämmer pistolens rotation
+    }
+
+    bool ShotAllowed()
+    {
+        if (lastShotTime >= shootingCooldown)
+        {
+            return true;
+        }
+        else { return false; }
+    }
+
+    void Shoot()
+    {
+
+        lastShotTime = 0;    //Återställ timern
+
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);  //Instantiata kulan
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();                                      //Hämta kulans rigidbody
+
+        if (bulletRb != null)   //Om kulans rigidbody hittas
+        {
+            bulletRb.velocity = direction.normalized * bulletSpeed;
+        }
+
+        ApplyRecoil();
+    }
+
+    void ApplyRecoil()
+    {
+        rb.AddForce(-direction.normalized * recoilForce, ForceMode2D.Impulse);
+    }
+
+    bool IsGrounded()
+    {
+        if (Physics2D.OverlapCircle(groundCheck.position, scanRadius, groundLayer))
+        {
+            return true;
+        }
+        else { return false; }
+    }
+    void Flip() //Spegelvänd spelaren och pistolen
+    {
         Vector3 scale = transform.localScale;
-        scale.x = -scale.x;  // Negate the x scale to flip
+        scale.x = -scale.x;             //Spegelvänd spelaren
         transform.localScale = scale;
 
-        // Toggle the facing direction
+
+        Vector3 gunScale = gunTransform.localScale;
+        gunScale.y = -gunScale.y;   //Spegelvänd pistolen
+        gunScale.x = -gunScale.x;   //Spegelvänd pistolen
+        gunTransform.localScale = gunScale;
+
+
         isFacingRight = !isFacingRight;
     }
 }
