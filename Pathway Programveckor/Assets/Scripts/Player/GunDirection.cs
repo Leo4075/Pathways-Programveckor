@@ -46,11 +46,11 @@ public class GunDirection : MonoBehaviour
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
 
-        if (Input.GetKey(KeyCode.D) && IsGrounded())
+        if (Input.GetKey(KeyCode.D))
         {
             walkDirection = 1;
         }
-        else if (Input.GetKey(KeyCode.A) && IsGrounded())
+        else if (Input.GetKey(KeyCode.A))
         {
             walkDirection = -1;
         }
