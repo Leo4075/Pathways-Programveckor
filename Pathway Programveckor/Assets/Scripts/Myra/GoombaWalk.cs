@@ -11,7 +11,9 @@ public class GoombaWalk : MonoBehaviour
     public LayerMask groundLayer;
     public Transform checkRight;
     public Transform checkLeft;
+    public Transform GroundCheck;
     private bool isGrounded;
+    private int direction;
     
     private bool movingRight = true;
 
@@ -19,7 +21,6 @@ public class GoombaWalk : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Debug.Log("GoombaWalk.cs start");
     }
 
     // Update is called once per frame
@@ -32,28 +33,25 @@ public class GoombaWalk : MonoBehaviour
     {
         if (!IsGroundAtPoint(checkRight))
         {
-           
             movingRight = false;
         }
 
         if (!IsGroundAtPoint(checkLeft))
         {
-            
             movingRight = true;
         }
 
-        if(!IsGroundAtPoint(checkLeft)&& !IsGroundAtPoint(checkLeft))
+        if(!IsGroundAtPoint(GroundCheck))
         {
-            isGrounded = false;
+            
         }
         else { isGrounded = true; }
 
         if (isGrounded)
         {
-            int direction = movingRight ? 1 : -1;
+            direction = movingRight ? 1 : -1;
             rb.velocity = new Vector2(speed * direction, rb.velocity.y);
         }
-        
     }
     bool IsGroundAtPoint(Transform checkPoint)
     {

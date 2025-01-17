@@ -64,10 +64,6 @@ public class GunDirection : MonoBehaviour
         float walkVelocity = walkSpeed * walkDirection;
 
         rb.AddForce(new Vector2(walkVelocity, 0));
-
-        Debug.Log("WalkSpeed=" + walkSpeed);
-        Debug.Log("WalkDirection=" + walkDirection);
-        Debug.Log(walkVelocity);
     }
 
     void AimToCursor()
