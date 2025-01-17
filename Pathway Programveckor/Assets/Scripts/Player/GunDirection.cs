@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GunDirection : MonoBehaviour
 {
@@ -10,10 +11,10 @@ public class GunDirection : MonoBehaviour
     public Transform bulletSpawnPoint; // Where the bullet spawns from
     public float bulletSpeed = 10f; // Speed of the bullet
     public float shootingCooldown = 0.5f; // Time between shots
-    public Vector2 direction;
 
     private float lastShotTime = 0f;
 
+    // Add this to track if the player is facing right
     private bool isFacingRight = true;
 
     private void Start()
@@ -37,7 +38,12 @@ public class GunDirection : MonoBehaviour
         }
 
         // Calculate the direction from the gun to the cursor
-        direction = cursorPos - (Vector2)gunTransform.position.normalized;
+        Vector2 direction = cursorPos - (Vector2)gunTransform.position;
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            rb.AddForce(-direction * recoilForce, ForceMode2D.Impulse);
+        }
 
         // Calculate the angle the gun needs to rotate to
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -46,11 +52,10 @@ public class GunDirection : MonoBehaviour
         gunTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         // Check if the player clicks the mouse and enough time has passed since the last shot
-        if (Input.GetKey(KeyCode.Mouse0) && Time.time - lastShotTime > shootingCooldown)
+        if (Input.GetButton("Fire1") && Time.time - lastShotTime > shootingCooldown)
         {
             ShootBullet(direction);
             lastShotTime = Time.time; // Update the last shot time
-            rb.AddForce(-direction.normalized * recoilForce, ForceMode2D.Impulse);
         }
     }
 
@@ -60,20 +65,22 @@ public class GunDirection : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
 
         // Set the bullet's velocity in the direction of the cursor
-        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        if (bulletRb != null)
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        if (rb != null)
         {
-            bulletRb.velocity = direction.normalized * bulletSpeed;
+            rb.velocity = direction.normalized * bulletSpeed;
         }
     }
 
     // The Flip method that changes the direction the player is facing
     void Flip()
     {
+        // Flip the object's scale on the X-axis to reverse its direction
         Vector3 scale = transform.localScale;
         scale.x = -scale.x;  // Negate the x scale to flip
         transform.localScale = scale;
 
+        // Toggle the facing direction
         isFacingRight = !isFacingRight;
     }
 }

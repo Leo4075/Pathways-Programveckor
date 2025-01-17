@@ -32,13 +32,13 @@ public class GoombaWalk : MonoBehaviour
     {
         if (!IsGroundAtPoint(checkRight))
         {
-            Debug.Log("Det finns ingen mark till höger");
+           
             movingRight = false;
         }
 
         if (!IsGroundAtPoint(checkLeft))
         {
-            Debug.Log("Det finns ingen mark till vänster");
+            
             movingRight = true;
         }
 

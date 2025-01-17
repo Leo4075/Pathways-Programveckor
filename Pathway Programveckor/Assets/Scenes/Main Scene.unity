@@ -452,13 +452,14 @@ GameObject:
   - component: {fileID: 462619329}
   - component: {fileID: 462619328}
   - component: {fileID: 462619330}
+  - component: {fileID: 462619331}
   m_Layer: 6
   m_Name: Myra
-  m_TagString: Untagged
+  m_TagString: Myra
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &462619325
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -619,6 +620,19 @@ MonoBehaviour:
     m_Bits: 64
   checkRight: {fileID: 1167669129}
   checkLeft: {fileID: 117083360}
+--- !u!114 &462619331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462619324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8a3007914a85d4abd82bac0865aefd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
 --- !u!1 &713789046
 GameObject:
   m_ObjectHideFlags: 0
@@ -9531,13 +9545,14 @@ GameObject:
   - component: {fileID: 1733990488}
   - component: {fileID: 1733990487}
   - component: {fileID: 1733990486}
+  - component: {fileID: 1733990491}
   m_Layer: 6
   m_Name: Mygga
-  m_TagString: Untagged
+  m_TagString: Mygga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!58 &1733990486
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9701,6 +9716,19 @@ Transform:
   - {fileID: 79213253}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1733990491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733990485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a593f22f1e3a647a174606c2511b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
 --- !u!1 &1861645991
 GameObject:
   m_ObjectHideFlags: 0
@@ -9746,6 +9774,7 @@ GameObject:
   - component: {fileID: 1965038420}
   - component: {fileID: 1965038425}
   - component: {fileID: 1965038426}
+  - component: {fileID: 1965038427}
   m_Layer: 0
   m_Name: 'Player '
   m_TagString: Untagged
@@ -9903,7 +9932,6 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 306621506}
   bulletSpeed: 20
   shootingCooldown: 0.5
-  direction: {x: 0, y: 0}
 --- !u!114 &1965038426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9923,6 +9951,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isFacingRight: 1
+--- !u!114 &1965038427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965038418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334ec43c771f5634aa920bd32944e322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
