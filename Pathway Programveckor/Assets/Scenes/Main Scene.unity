@@ -13091,10 +13091,8 @@ GameObject:
   - component: {fileID: 1965038422}
   - component: {fileID: 1965038420}
   - component: {fileID: 1965038425}
-  - component: {fileID: 1965038426}
   - component: {fileID: 1965038427}
   - component: {fileID: 1965038428}
-  - component: {fileID: 1965038429}
   m_Layer: 0
   m_Name: 'Player '
   m_TagString: Untagged
@@ -13170,7 +13168,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3874252973134350612, guid: 88655db5cd6309f4e8e5808b4543d31c, type: 3}
+  m_Sprite: {fileID: 8852901965148038151, guid: ed4768631f730054f9fad041466a9b45, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13224,25 +13222,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &1965038426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965038418}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2f5e5bdb5a25a43b57b24d03d1bf91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpForce: 15
-  groundCheck: {fileID: 226376424}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  isFacingRight: 1
 --- !u!114 &1965038427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13292,8 +13271,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.625, y: 1.75}
+    pivot: {x: 0.54112554, y: 0}
+    oldSize: {x: 28.875, y: 1.75}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13302,21 +13281,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.625, y: 1.75}
   m_EdgeRadius: 0
---- !u!111 &1965038429
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965038418}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
