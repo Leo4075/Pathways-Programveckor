@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GunDirection : MonoBehaviour
@@ -48,13 +49,17 @@ public class GunDirection : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            walkDirection = 1;
+           walkDirection = 1;
         }
         else if (Input.GetKey(KeyCode.A))
         {
             walkDirection = -1;
+
         }
-        else { walkDirection = 0; }
+        else
+        {
+           walkDirection = 0;
+        }
     }
 
     private void FixedUpdate()
