@@ -25,10 +25,7 @@ public class TestMovement : MonoBehaviour
     {
         // Check if the player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-    }
 
-    void FixedUpdate()
-    {
         // Jump if the player presses the space key and is grounded
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -51,6 +48,11 @@ public class TestMovement : MonoBehaviour
         rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
     }
 
+    void FixedUpdate()
+    {
+            
+    }
+
     // Method to flip the player character
     void Flip()
     {
@@ -63,3 +65,4 @@ public class TestMovement : MonoBehaviour
         isFacingRight = !isFacingRight;
     }
 }
+
