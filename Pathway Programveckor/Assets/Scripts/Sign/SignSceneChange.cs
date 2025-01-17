@@ -18,7 +18,7 @@ public class SignSceneChange : MonoBehaviour
     {
         if(isInsideRadius == true && Input.GetKeyDown(KeyCode.E))
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         }
     }
 
