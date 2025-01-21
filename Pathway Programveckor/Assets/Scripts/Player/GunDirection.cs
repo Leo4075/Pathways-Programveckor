@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GunDirection : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class GunDirection : MonoBehaviour
     private float lastShotTime = 0f;
     private bool isFacingRight = true;
 
+    //Animation()-relaterade variabler
+    private bool playJumpAnim = false;
+    private bool playShootAnim = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,15 +41,19 @@ public class GunDirection : MonoBehaviour
     {
         lastShotTime += 1 * Time.deltaTime;
 
+        Animate();
+
         AimToCursor();
         if (ShotAllowed() && Input.GetMouseButton(0))
         {
             Shoot();
+            playShootAnim = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && IsTouchingLayer(groundCheck,groundLayer))
         {
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            playJumpAnim = true;
         }
 
         if (Input.GetKey(KeyCode.D))
@@ -64,7 +73,10 @@ public class GunDirection : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(rb.velocity.x * retardationSpeed, rb.velocity.y);
+        if (IsTouchingLayer(groundCheck, groundLayer))
+        {
+            rb.velocity = new Vector2(rb.velocity.x * retardationSpeed, rb.velocity.y);
+        }
 
         float walkVelocity = walkSpeed * walkDirection;
 
@@ -120,14 +132,15 @@ public class GunDirection : MonoBehaviour
         rb.AddForce(-direction.normalized * recoilForce, ForceMode2D.Impulse);
     }
 
-    bool IsGrounded()
+    bool IsTouchingLayer(Transform transformPoint, LayerMask layer)
     {
-        if (Physics2D.OverlapCircle(groundCheck.position, scanRadius, groundLayer))
+        if (Physics2D.OverlapCircle(transformPoint.position, scanRadius, layer))
         {
             return true;
         }
         else { return false; }
     }
+
     void Flip() //Spegelvänd spelaren och pistolen
     {
         Vector3 scale = transform.localScale;
@@ -142,5 +155,68 @@ public class GunDirection : MonoBehaviour
 
 
         isFacingRight = !isFacingRight;
+    }
+
+    void Animate()
+    {
+        string animate = ("<color=purple>Animate():</color>");
+
+        if (playShootAnim)  //När man skjuter
+        {
+            Debug.Log(animate + "<color=#FF9512>Shoot</color>");
+            playShootAnim = false;
+        }
+        if (playJumpAnim)   //När man hoppar
+        {
+            Debug.Log(animate + "<color=#4AABFF>Jump</color>");
+            playJumpAnim = false;
+        }
+        else if (IsTouchingLayer(groundCheck, groundLayer))  //Animationer som spelas när man rör marken
+        {
+            if ((walkDirection == 1 && isFacingRight) ||
+                (walkDirection == -1 && !isFacingRight))
+            {
+                Debug.Log(animate + "<color=lime>RunForward</color>");
+                //Spela framåtsring-animation
+            }
+            else if (walkDirection!=0)
+            {
+                Debug.Log(animate+"<color=#FFABEE>RunBackward</color>");
+                //Spela bakåtspring-animation
+            }
+            else
+            {
+                Debug.Log(animate + "Idle");
+                //Spela idle-animation
+            }
+        }
+        else    //Animationer som spelas när man inte rör marken
+        {
+            if (rb.velocity.x < -5)
+            {
+                Debug.Log(animate + "<color=#179B00>AirLeft</color>");
+                //Spela vänsterflyganimation
+            }
+            else if (rb.velocity.x > 5)
+            {
+                Debug.Log(animate + "<color=#9B0022>AirRight</color>");
+                //Spela högerflyganimation
+            }
+            else if (rb.velocity.y < -5)
+            {
+                Debug.Log(animate + "<color=#7300B5>Falling</color>");
+                //Spela fallanimation
+            }
+            else if (rb.velocity.y > 5)
+            {
+                Debug.Log(animate + "<color=#48FFA6>Rising</color>");
+                //Spela lyftanimation
+            }
+            else
+            {
+                Debug.Log(animate + "IdleAir");
+                //Stilla i luften
+            }
+        }
     }
 }
