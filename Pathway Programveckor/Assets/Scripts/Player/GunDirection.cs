@@ -192,15 +192,16 @@ public class GunDirection : MonoBehaviour
         }
         else    //Animationer som spelas när man inte rör marken
         {
-            if (rb.velocity.x < -5)
+            if ((rb.velocity.x > 4 && isFacingRight) ||
+                (rb.velocity.x < -4 && !isFacingRight))
             {
-                Debug.Log(animate + "<color=#179B00>AirLeft</color>");
-                //Spela vänsterflyganimation
+                Debug.Log(animate + "<color=#179B00>AirForward</color>");
+                //Spela framåtflyganimation
             }
-            else if (rb.velocity.x > 5)
+            else if (rb.velocity.x>4||rb.velocity.x<4)
             {
-                Debug.Log(animate + "<color=#9B0022>AirRight</color>");
-                //Spela högerflyganimation
+                Debug.Log(animate + "<color=#9B0022>AirBackward</color>");
+                //Spela bakåtflyganimation
             }
             else if (rb.velocity.y < -5)
             {
