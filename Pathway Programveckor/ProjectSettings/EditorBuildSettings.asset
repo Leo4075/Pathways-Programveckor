@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 742cdddc669d3474babe4e865b4f491c
+  - enabled: 1
+    path: Assets/Scenes/Main Scene.unity
+    guid: 044753eecddd1454f9116faff0e6d17f
   - enabled: 1
     path: Assets/Scenes/Skyltar/Skylt A.unity
     guid: a6cbf3b586c4040459c4a516fb3b3428
@@ -20,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: a9d38aea7f12a5345bc1bfd843942d67
-  - enabled: 1
-    path: Assets/Scenes/Main Scene.unity
-    guid: 044753eecddd1454f9116faff0e6d17f
   m_configObjects: {}
