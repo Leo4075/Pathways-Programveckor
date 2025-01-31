@@ -7,9 +7,12 @@ public class MyrHealth : MonoBehaviour
     private int health;
     public int maxHealth = 5;
 
+    XPmanager XPman;
+
     // Start is called before the first frame update
     void Start()
     {
+        XPman = FindObjectOfType<XPmanager>();
         health = maxHealth;
     }
 
@@ -33,8 +36,7 @@ public class MyrHealth : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
-        gameObject.SendMessage("ReceiveMessage", SendMessageOptions.DontRequireReceiver);
-        Debug.Log("Message Sent");
+        XPman.MyrDeath();
     }
     // This function will be called if the message is received
 }
