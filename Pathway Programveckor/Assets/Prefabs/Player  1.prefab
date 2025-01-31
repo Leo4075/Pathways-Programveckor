@@ -250,7 +250,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 4
@@ -278,15 +278,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 949382452069521327}
-  recoilForce: 20
+  recoilForce: 70
   gunTransform: {fileID: 3981178974474179004}
   bulletPrefab: {fileID: 4704279795201698066, guid: fe925560e8c13ff4e8ee8130b4c28034, type: 3}
   bulletSpawnPoint: {fileID: 780665869787135785}
   bulletSpeed: 20
-  shootingCooldown: 0.3
+  shootingCooldown: 1
   retardationSpeed: 1
-  jumpForce: 10
-  walkSpeed: 15
+  jumpForce: 25
+  walkSpeed: 30
   groundCheck: {fileID: 7414421423126111087}
   groundLayer:
     serializedVersion: 2
