@@ -18,7 +18,7 @@ public class MyrHealth : MonoBehaviour
     {
         if(health <= 0)
         {
-            Destroy(gameObject);
+            Death();
         }
     }
 
@@ -29,4 +29,12 @@ public class MyrHealth : MonoBehaviour
             health -= 1;
         }
     }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+        gameObject.SendMessage("ReceiveMessage", SendMessageOptions.DontRequireReceiver);
+        Debug.Log("Message Sent");
+    }
+    // This function will be called if the message is received
 }
