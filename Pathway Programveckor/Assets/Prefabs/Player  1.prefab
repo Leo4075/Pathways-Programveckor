@@ -310,15 +310,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 949382452069521327}
-  recoilForce: 70
+  recoilForce: 55
   gunTransform: {fileID: 3981178974474179004}
   bulletPrefab: {fileID: 4704279795201698066, guid: fe925560e8c13ff4e8ee8130b4c28034, type: 3}
   bulletSpawnPoint: {fileID: 780665869787135785}
   bulletSpeed: 20
   shootingCooldown: 1
   retardationSpeed: 1
-  jumpForce: 25
-  walkSpeed: 30
+  jumpForce: 35
+  walkSpeed: 40
   groundCheck: {fileID: 7414421423126111087}
   groundLayer:
     serializedVersion: 2
