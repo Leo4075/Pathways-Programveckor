@@ -29,6 +29,9 @@ public class GunDirection : MonoBehaviour
     private bool isFacingRight = true;
 
     //Animation()-relaterade variabler
+    public float jumpDuration = 1f;
+    private float timeSinceJump = 0f;
+    private bool jumpStart = false;
     private bool playJumpAnim = false;
     private bool playShootAnim = false;
 
@@ -53,7 +56,7 @@ public class GunDirection : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsTouchingLayer(groundCheck,groundLayer))
         {
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            playJumpAnim = true;
+            jumpStart = true;
         }
 
         if (Input.GetKey(KeyCode.D))
@@ -163,30 +166,38 @@ public class GunDirection : MonoBehaviour
 
         if (playShootAnim)  //När man skjuter
         {
-            //Debug.Log(animate + "<color=#FF9512>Shoot</color>");
+            Debug.Log(animate + "<color=#FF9512>Shoot</color>");
             playShootAnim = false;
         }
-        if (playJumpAnim)   //När man hoppar
+        
+        if (jumpStart)  //Återställ hopptimern
         {
-            //Debug.Log(animate + "<color=#4AABFF>Jump</color>");
-            playJumpAnim = false;
+            jumpStart = false;
+            timeSinceJump = 0;
         }
+
+        if (timeSinceJump<=jumpDuration)   //Om man fortfarande hoppar
+        {
+            timeSinceJump += 1 * Time.deltaTime;
+            Debug.Log(animate + "<color=#4AABFF>Jumping</color>");
+        }
+
         else if (IsTouchingLayer(groundCheck, groundLayer))  //Animationer som spelas när man rör marken
         {
             if ((walkDirection == 1 && isFacingRight) ||
                 (walkDirection == -1 && !isFacingRight))
             {
-                //Debug.Log(animate + "<color=lime>RunForward</color>");
+                Debug.Log(animate + "<color=lime>RunForward</color>");
                 //Spela framåtsring-animation
             }
             else if (walkDirection!=0)
             {
-                //Debug.Log(animate+"<color=#FFABEE>RunBackward</color>");
+                Debug.Log(animate+"<color=#FFABEE>RunBackward</color>");
                 //Spela bakåtspring-animation
             }
             else
             {
-                //Debug.Log(animate + "Idle");
+                Debug.Log(animate + "Idle");
                 //Spela idle-animation
             }
         }
@@ -195,27 +206,27 @@ public class GunDirection : MonoBehaviour
             if (((rb.velocity.x > 5) && isFacingRight) ||
                 ((rb.velocity.x < -5) && !isFacingRight))
             {
-                //Debug.Log(animate + "<color=#179B00>AirForward</color>");
+                Debug.Log(animate + "<color=#179B00>AirForward</color>");
                 //Spela framåtflyganimation
             }
             else if (rb.velocity.x>5||rb.velocity.x<-5)
             {
-                //Debug.Log(animate + "<color=#9B0022>AirBackward</color>");
+                Debug.Log(animate + "<color=#9B0022>AirBackward</color>");
                 //Spela bakåtflyganimation
             }
             else if (rb.velocity.y < 4)
             {
-                //Debug.Log(animate + "<color=#7300B5>Falling</color>");
+                Debug.Log(animate + "<color=#7300B5>Falling</color>");
                 //Spela fallanimation
             }
             else if (rb.velocity.y > 4)
             {
-                //Debug.Log(animate + "<color=#48FFA6>Rising</color>");
+                Debug.Log(animate + "<color=#48FFA6>Rising</color>");
                 //Spela lyftanimation
             }
             else
             {
-                //Debug.Log(animate + "IdleAir");
+                Debug.Log(animate + "IdleAir");
                 //Stilla i luften
             }
         }
