@@ -18,7 +18,7 @@ public class SignSceneChange : MonoBehaviour
     {
         if(isInsideRadius == true && Input.GetKeyDown(KeyCode.E))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("Skylt A");
         }
     }
 

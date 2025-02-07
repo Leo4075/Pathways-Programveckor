@@ -13694,6 +13694,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpDuration: 1
 --- !u!114 &1965038427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13789,6 +13790,7 @@ MonoBehaviour:
   xpLevelUp: 20
   coefficient: 10
   initialXPCost: 20
+  xpMultiplier: 1.2
 --- !u!1001 &1987614989
 PrefabInstance:
   m_ObjectHideFlags: 0

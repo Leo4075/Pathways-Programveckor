@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     {
         if(health <= 0)
         {
-            SceneManager.LoadScene(3); // loads the death scene on death (make and choose the right scene)
+            SceneManager.LoadScene("DeathScene"); // loads the death scene on death (make and choose the right scene)
             print("Player died");
         }
     }

@@ -16,7 +16,7 @@ public class RestartGame : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene("Main Scene");
         }
     }
 }
