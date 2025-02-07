@@ -24,12 +24,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642694877449159635}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8852068358851969444}
+  m_Father: {fileID: 7637242286754089502}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &844837321744401323
 GameObject:
@@ -61,6 +61,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3981178974474179004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1450049348799647348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7637242286754089502}
+  m_Layer: 0
+  m_Name: CheckTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7637242286754089502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450049348799647348}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7414421423126111087}
+  m_Father: {fileID: 8852068358851969444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1639059105339330061
 GameObject:
@@ -182,8 +214,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 7414421423126111087}
   - {fileID: 3981178974474179004}
+  - {fileID: 7637242286754089502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5532589864360485851
@@ -278,19 +310,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 949382452069521327}
-  recoilForce: 70
+  recoilForce: 55
   gunTransform: {fileID: 3981178974474179004}
   bulletPrefab: {fileID: 4704279795201698066, guid: fe925560e8c13ff4e8ee8130b4c28034, type: 3}
   bulletSpawnPoint: {fileID: 780665869787135785}
   bulletSpeed: 20
   shootingCooldown: 1
   retardationSpeed: 1
-  jumpForce: 25
-  walkSpeed: 30
+  jumpForce: 35
+  walkSpeed: 40
   groundCheck: {fileID: 7414421423126111087}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpDuration: 0.35
 --- !u!114 &6359152961082860005
 MonoBehaviour:
   m_ObjectHideFlags: 0
